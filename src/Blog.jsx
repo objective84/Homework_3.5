@@ -1,12 +1,13 @@
 import React,{useState} from 'react'
 import BlogPost from './BlogPost'
 
+
 const Blog = () => {
     
-    // 2) Create a list of posts using useState, called listOfPosts
+   
     let [listOfPosts, setListOfPosts] = useState([])
 
-    // 10) create a function to add a new post to the listOfPosts
+    
     function addToList(newPost){
         setListOfPosts(previousPosts =>{
             return [newPost, ...previousPosts]
@@ -15,18 +16,29 @@ const Blog = () => {
 
   return (
     <>
-    {/* 5) Bring in the BlogPost Component, this is where the posts will get created and where the input form is. It looked like this:
-    <BlogPost/>
+
+
+    {
+    /* 
+    #################################################################################################################################################################################### HOMEWORK ####################################################################################################################################################################
+    
+    
+    TODO  Create a UserInput Component that will take the information from the input of the user and pass it onto the BlogPost Component
+    
+    The BlogPost Component should NOT have inputs in it. It should only have a submit button, and after pressing the button, it should create a post and add it to the listOfPosts in the Blog Component.
+
+
+    Optional TODO: Delete the last post from the listOfPosts
+    Optional TODO: Add dates to the posts
     */}
 
-    {/* 11) Pass the callback function called addToList from this Blog component down to the BlogPost Component */}
     <BlogPost addToList={addToList}/>
 
-    {/* 3) Create a for loop (map), looping through all the posts in the listOfPosts*/}
+
     {listOfPosts.map(post =>{
         return(
             <>
-            {/* 4) Display the post's title, author, and content */}
+            
             <h2>{post.title}</h2>
             <h3>{post.author}</h3>
             <p>{post.content}</p>
