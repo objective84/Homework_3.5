@@ -3,21 +3,30 @@ import BlogPost from './BlogPost'
 
 
 const Blog = () => {
-    
-   
     let [listOfPosts, setListOfPosts] = useState([])
-
-    
-    function addToList(newPost){
+    const addToList=(newPost) => {
         setListOfPosts(previousPosts =>{
             return [newPost, ...previousPosts]
-        })
+        });
     }
+
+    const deletePost = (e) => {
+        const filter = (post) => {
+            return post.id != e.target.value
+        };
+        const filteredList = listOfPosts.filter(filter);
+        setListOfPosts(filteredList);
+    }
+
+    const getNextId = () => {
+        if(listOfPosts.length === 0) return 0;
+        return listOfPosts[listOfPosts.length-1].id++
+    }
+
+
 
   return (
     <>
-
-
     {
     /* 
     #################################################################################################################################################################################### HOMEWORK ####################################################################################################################################################################
@@ -32,16 +41,17 @@ const Blog = () => {
     Optional TODO: Add dates to the posts
     */}
 
-    <BlogPost addToList={addToList}/>
+    <BlogPost id={getNextId()} addToList={addToList}/>
 
 
     {listOfPosts.map(post =>{
         return(
             <>
-            
             <h2>{post.title}</h2>
+            <span>{post.date}</span>
             <h3>{post.author}</h3>
             <p>{post.content}</p>
+            <button value={post.id} onClick={deletePost}>Delete</button>
             <hr />
             </>
         )
